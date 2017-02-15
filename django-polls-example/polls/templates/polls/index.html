@@ -1,0 +1,25 @@
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+    <li><a href="{% url 'polls:detail' question.pk %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+<h3> Create Polls </h3>
+    <form action="{% url "polls:add_poll" %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <dl>
+            <dt>Question:
+            <dd><input type=text size=200 name=question>
+            <dt>Choice 1:
+            <dd><input type=text size=200 name=choice1>
+            <dt>Choice 2:
+            <dd><input type=text size=200 name=choice2>
+            <dd><input type=submit value="Add Question">
+        </dl>
+    </form>
+
+
