@@ -13,8 +13,8 @@ function Django(cfg, mongo) {
   var containers = new Container(cfg.image).withEnv(env).replicate(cfg.nWorker);
   this._app = new Service("app", containers);
 
-  mongo.connect(mongo.port(), this);
-  this.connect(mongo.port(), mongo);
+  mongo.connect(mongo.port, this);
+  this.connect(mongo.port, mongo);
 };
 
 Django.prototype.deploy = function(deployment) {
