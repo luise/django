@@ -1,6 +1,8 @@
-var Django = require("github.com/quilt/django")
-var HaProxy = require("github.com/quilt/haproxy").Haproxy;
-var Mongo = require("github.com/quilt/mongo");
+const {createDeployment, Machine} = require("@quilt/quilt");
+
+var Django = require("./django.js")
+var HaProxy = require("@quilt/haproxy").Haproxy;
+var Mongo = require("@quilt/mongo");
 
 // Infrastructure
 var deployment = createDeployment({});

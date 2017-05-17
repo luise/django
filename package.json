@@ -1,3 +1,11 @@
 {
-    "main": "./django.js"
+  "name": "@quilt/django",
+  "version": "0.0.1",
+  "main": "./django.js",
+  "license": "MIT",
+  "dependencies": {
+    "@quilt/quilt": "quilt/quilt",
+    "@quilt/mongo": "quilt/mongo",
+    "@quilt/haproxy": "quilt/haproxy"
+  }
 }

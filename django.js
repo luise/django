@@ -1,3 +1,5 @@
+const {Container, Service} = require("@quilt/quilt");
+
 // Specs for Django web service
 function Django(cfg, mongo) {
   if (typeof cfg.nWorker !== 'number') {
