@@ -1,11 +1,18 @@
-const {Container, Service} = require("@quilt/quilt");
+const {Container, Service} = require('@quilt/quilt');
 
-// Specs for Django web service
+/**
+ * Creates a replicated Django web service connected to MongoDB.
+ * @param {number} nWorker - The desired number of Django replicas.
+ * @param {string} image - The image for the Django application.
+ * @param {Service} mongo - The MongoDB service to connect Django to.
+ * @param {Object} [env] - The environment variables to set in the Django
+ *    containers. A map from variable name to value.
+ */
 function Django(nWorker, image, mongo, env = {}) {
-  env.MONGO_URI = mongo.uri("django-example")
+  env.MONGO_URI = mongo.uri('django-example');
 
-  var containers = new Container(image).withEnv(env).replicate(nWorker);
-  this._app = new Service("app", containers);
+  let containers = new Container(image).withEnv(env).replicate(nWorker);
+  this._app = new Service('app', containers);
 
   this.connect(mongo.port, mongo);
 };
@@ -19,7 +26,7 @@ Django.prototype.services = function() {
 };
 
 Django.prototype.connect = function(port, to) {
-  var self = this;
+  let self = this;
   to.services().forEach(function(service) {
     self._app.connect(port, service);
   });
