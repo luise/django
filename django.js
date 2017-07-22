@@ -2,13 +2,6 @@ const {Container, Service} = require("@quilt/quilt");
 
 // Specs for Django web service
 function Django(nWorker, image, mongo, env = {}) {
-  if (typeof nWorker !== 'number') {
-    throw new Error('`nWorker` is required');
-  }
-  if (typeof image !== 'string') {
-    throw new Error('`image` is required');
-  }
-
   env.MONGO_URI = mongo.uri("django-example")
 
   var containers = new Container(image).withEnv(env).replicate(nWorker);
