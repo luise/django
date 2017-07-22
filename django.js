@@ -14,7 +14,6 @@ function Django(nWorker, image, mongo, env = {}) {
   var containers = new Container(image).withEnv(env).replicate(nWorker);
   this._app = new Service("app", containers);
 
-  mongo.connect(mongo.port, this);
   this.connect(mongo.port, mongo);
 };
 
