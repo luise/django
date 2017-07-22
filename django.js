@@ -8,7 +8,6 @@ function Django(cfg, mongo) {
   if (typeof cfg.image !== 'string') {
     throw new Error('`image` is required');
   }
-  this._port = cfg.port || 80;
   var env = cfg.env || {};
   env.MONGO_URI = mongo.uri("django-example")
 
@@ -25,10 +24,6 @@ Django.prototype.deploy = function(deployment) {
 
 Django.prototype.services = function() {
   return [this._app];
-};
-
-Django.prototype.port = function() {
-  return this._port;
 };
 
 Django.prototype.connect = function(port, to) {
