@@ -1,7 +1,7 @@
-const {createDeployment, Machine} = require("@quilt/quilt");
+const {createDeployment, Machine, publicInternet} = require("@quilt/quilt");
 
 var Django = require("./django.js")
-var HaProxy = require("@quilt/haproxy");
+var haproxy = require("@quilt/haproxy");
 var Mongo = require("@quilt/mongo");
 
 // Infrastructure
@@ -20,12 +20,12 @@ var django = new Django({
   image: "quilt/django-polls",
 }, mongo);
 
-var haproxy = new HaProxy(1, django.services());
+var proxy = haproxy.singleServiceLoadBalancer(1, django._app);
 
 // Connections
-haproxy.public();
+proxy.allowFrom(publicInternet, 80);
 
 // Deployment
 deployment.deploy(baseMachine.asMaster())
 deployment.deploy(baseMachine.asWorker().replicate(3))
-deployment.deploy([django, mongo, haproxy]);
+deployment.deploy([django, mongo, proxy]);
