@@ -15,10 +15,9 @@ var baseMachine = new Machine({
 // Applications
 var mongo = new Mongo(3);
 
-var django = new Django({
-  nWorker: 3,
-  image: "quilt/django-polls",
-}, mongo);
+// Three Django replicas created from the "quilt/django-polls" image, and
+// connected to the mongo database.
+var django = new Django(3, "quilt/django-polls", mongo);
 
 var proxy = haproxy.singleServiceLoadBalancer(1, django._app);
 
