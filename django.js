@@ -1,4 +1,4 @@
-const {Container, Service} = require('@quilt/quilt');
+const { Container, Service } = require('@quilt/quilt');
 
 /**
  * Creates a replicated Django web service connected to MongoDB.
@@ -8,27 +8,28 @@ const {Container, Service} = require('@quilt/quilt');
  * @param {Object} [env] - The environment variables to set in the Django
  *    containers. A map from variable name to value.
  */
-function Django(nWorker, image, mongo, env = {}) {
+function Django(nWorker, image, mongo, envArg = {}) {
+  const env = envArg;
   env.MONGO_URI = mongo.uri('django-example');
 
-  let containers = new Container(image).withEnv(env).replicate(nWorker);
-  this._app = new Service('app', containers);
+  const containers = new Container(image).withEnv(env).replicate(nWorker);
+  this.app = new Service('app', containers);
 
   this.connect(mongo.port, mongo);
-};
+}
 
-Django.prototype.deploy = function(deployment) {
+Django.prototype.deploy = function deploy(deployment) {
   deployment.deploy(this.services());
 };
 
-Django.prototype.services = function() {
-  return [this._app];
+Django.prototype.services = function services() {
+  return [this.app];
 };
 
-Django.prototype.connect = function(port, to) {
-  let self = this;
-  to.services().forEach(function(service) {
-    self._app.connect(port, service);
+Django.prototype.connect = function connect(port, to) {
+  const self = this;
+  to.services().forEach((service) => {
+    self.app.connect(port, service);
   });
 };
 
