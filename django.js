@@ -26,11 +26,4 @@ Django.prototype.services = function services() {
   return [this.app];
 };
 
-Django.prototype.connect = function connect(port, to) {
-  const self = this;
-  to.services().forEach((service) => {
-    self.app.connect(port, service);
-  });
-};
-
 module.exports = Django;
