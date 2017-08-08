@@ -15,7 +15,7 @@ function Django(nWorker, image, mongo, envArg = {}) {
   const containers = new Container(image).withEnv(env).replicate(nWorker);
   this.app = new Service('app', containers);
 
-  this.connect(mongo.port, mongo);
+  mongo.allowFrom(this, mongo.port);
 }
 
 Django.prototype.deploy = function deploy(deployment) {
