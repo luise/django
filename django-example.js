@@ -19,7 +19,7 @@ const mongo = new Mongo(3);
 // connected to the mongo database.
 const django = new Django(3, 'quilt/django-polls', mongo);
 
-const proxy = haproxy.singleServiceLoadBalancer(1, django.app);
+const proxy = haproxy.simpleLoadBalancer(django.cluster);
 
 // Connections
 proxy.allowFrom(publicInternet, 80);
