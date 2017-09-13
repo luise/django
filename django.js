@@ -12,9 +12,10 @@ function Django(nWorker, image, mongo, env = {}) {
   const envWithMongo = { MONGO_URI: mongo.uri('django-example') };
   Object.assign(envWithMongo, env);
 
-  this.cluster = new Container('django-poll', image)
-    .withEnv(envWithMongo)
-    .replicate(nWorker);
+  this.cluster = [];
+  for (let i = 0; i < nWorker; i += 1) {
+    this.cluster.push(new Container('django-poll', image).withEnv(envWithMongo));
+  }
   mongo.allowFrom(this.cluster, mongo.port);
 }
 
