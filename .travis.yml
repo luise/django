@@ -13,7 +13,7 @@ before_script:
 
 script:
     - gulp lint
-    - ./quilt inspect ./django-example.js graphviz
+    - ./quilt inspect ./djangoExample.js graphviz
 
 notifications:
     slack:

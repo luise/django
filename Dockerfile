@@ -4,7 +4,7 @@ Maintainer Brian Sang <sang.bri@gmail.com>
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY ./django-polls-example /usr/src/app
+COPY ./djangoPollsExample /usr/src/app
 
 RUN pip install -r requirements.txt
 
