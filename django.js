@@ -12,15 +12,15 @@ function Django(nWorker, image, mongo, env = {}) {
   const envWithMongo = { MONGO_URI: mongo.uri('django-example') };
   Object.assign(envWithMongo, env);
 
-  this.cluster = [];
+  this.containers = [];
   for (let i = 0; i < nWorker; i += 1) {
-    this.cluster.push(new Container('django-poll', image).withEnv(envWithMongo));
+    this.containers.push(new Container('django-poll', image).withEnv(envWithMongo));
   }
-  mongo.allowFrom(this.cluster, mongo.port);
+  mongo.allowFrom(this.containers, mongo.port);
 }
 
 Django.prototype.deploy = function deploy(deployment) {
-  deployment.deploy(this.cluster);
+  deployment.deploy(this.containers);
 };
 
 module.exports = Django;
