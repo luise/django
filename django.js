@@ -20,7 +20,7 @@ function Django(nWorker, image, mongo, env = {}) {
 }
 
 Django.prototype.deploy = function deploy(deployment) {
-  deployment.deploy(this.containers);
+  this.containers.forEach(container => container.deploy(deployment));
 };
 
 module.exports = Django;

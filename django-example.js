@@ -16,12 +16,13 @@ deployment.deploy(baseMachine.asWorker().replicate(3));
 
 // Create applications.
 const mongo = new Mongo(3);
+mongo.deploy(deployment);
 
 // Create three Django replicas created from the "quilt/django-polls" image, and
 // connected to the mongo database.
 const django = new Django(3, 'quilt/django-polls', mongo);
+django.deploy(deployment);
 
 const proxy = haproxy.simpleLoadBalancer(django.containers);
 proxy.allowFrom(publicInternet, 80);
-
-deployment.deploy([django, mongo, proxy]);
+proxy.deploy(deployment);
