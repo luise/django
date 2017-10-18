@@ -1,4 +1,4 @@
-# Django for Quilt.js
+# Django for Kelda.js
 
-This repository implements a Django specification for Quilt.js. See
-[Quilt](http://quilt.io) for more information.
+This repository implements a Django specification for Kelda.js. See
+[Kelda](http://kelda.io) for more information.

@@ -1,4 +1,4 @@
-const { Container } = require('@quilt/quilt');
+const { Container } = require('kelda');
 
 /**
  * Creates a replicated Django web service connected to MongoDB.

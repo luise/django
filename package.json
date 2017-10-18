@@ -1,12 +1,12 @@
 {
-  "name": "@quilt/django",
+  "name": "@kelda/django",
   "version": "0.0.2",
   "main": "./django.js",
   "license": "MIT",
   "dependencies": {
-    "@quilt/quilt": "quilt/quilt",
-    "@quilt/mongo": "quilt/mongo",
-    "@quilt/haproxy": "quilt/haproxy"
+    "kelda": "0.x",
+    "@kelda/mongo": "kelda/mongo",
+    "@kelda/haproxy": "kelda/haproxy"
   },
   "devDependencies": {
     "eslint": "^4.4.1",

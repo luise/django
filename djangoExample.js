@@ -1,8 +1,8 @@
-const { createDeployment, Machine, publicInternet } = require('@quilt/quilt');
+const { createDeployment, Machine, publicInternet } = require('kelda');
 
 const Django = require('./django.js');
-const haproxy = require('@quilt/haproxy');
-const Mongo = require('@quilt/mongo');
+const haproxy = require('@kelda/haproxy');
+const Mongo = require('@kelda/mongo');
 
 const numReplicas = 3;
 
@@ -20,9 +20,9 @@ deployment.deploy(baseMachine.asWorker().replicate(numReplicas));
 const mongo = new Mongo(numReplicas);
 mongo.deploy(deployment);
 
-// Create three Django replicas created from the "quilt/django-polls" image, and
+// Create three Django replicas created from the "keldaio/django-polls" image, and
 // connected to the mongo database.
-const django = new Django(numReplicas, 'quilt/django-polls', mongo);
+const django = new Django(numReplicas, 'keldaio/django-polls', mongo);
 django.deploy(deployment);
 
 const proxy = haproxy.simpleLoadBalancer(django.containers);
