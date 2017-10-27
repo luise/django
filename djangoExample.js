@@ -6,10 +6,7 @@ const Mongo = require('@kelda/mongo');
 
 const numReplicas = 3;
 
-const baseMachine = new Machine({
-  provider: 'Amazon',
-  // sshKeys: githubKeys("CHANGE_ME"), // Replace with your GitHub username
-});
+const baseMachine = new Machine({ provider: 'Amazon' });
 
 // Create infrastructure.
 const infra = new Infrastructure(
