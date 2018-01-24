@@ -16,7 +16,7 @@ function Django(nWorker, image, mongo, env = {}) {
   for (let i = 0; i < nWorker; i += 1) {
     this.containers.push(new Container('django-poll', image).withEnv(envWithMongo));
   }
-  mongo.allowFrom(this.containers, mongo.port);
+  mongo.allowTrafficFrom(this.containers, mongo.port);
 }
 
 Django.prototype.deploy = function deploy(deployment) {

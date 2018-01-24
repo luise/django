@@ -1,4 +1,4 @@
-const { Infrastructure, Machine, publicInternet } = require('kelda');
+const { Infrastructure, Machine, publicInternet, allowTraffic } = require('kelda');
 
 const Django = require('./django.js');
 const haproxy = require('@kelda/haproxy');
@@ -23,5 +23,5 @@ const django = new Django(numReplicas, 'keldaio/django-polls', mongo);
 django.deploy(infra);
 
 const proxy = haproxy.simpleLoadBalancer(django.containers);
-proxy.allowFrom(publicInternet, 80);
+allowTraffic(publicInternet, proxy, 80);
 proxy.deploy(infra);
