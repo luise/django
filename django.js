@@ -14,7 +14,11 @@ function Django(nWorker, image, mongo, env = {}) {
 
   this.containers = [];
   for (let i = 0; i < nWorker; i += 1) {
-    this.containers.push(new Container('django-poll', image).withEnv(envWithMongo));
+    this.containers.push(new Container({
+      name: 'django-poll',
+      image,
+      env: envWithMongo,
+    }));
   }
   mongo.allowTrafficFrom(this.containers, mongo.port);
 }

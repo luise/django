@@ -9,9 +9,10 @@ const numReplicas = 3;
 const baseMachine = new Machine({ provider: 'Amazon' });
 
 // Create infrastructure.
-const infra = new Infrastructure(
-  baseMachine,
-  baseMachine.replicate(numReplicas));
+const infra = new Infrastructure({
+  masters: baseMachine,
+  workers: baseMachine.replicate(numReplicas),
+});
 
 // Create applications.
 const mongo = new Mongo(numReplicas);
